@@ -1,31 +1,49 @@
-import React from "react";
+// Import Library
+import React, { useState } from "react";
 
-import Toast from "./components/Toast";
+// Import Custom Component
+import ToastContainer from "./components/ToastContainer";
 
+// Static Data(Toast)
 let data = [
-  { id: 1, type: "success", timeout: 10000, title: "title" },
-  { id: 2, type: "error", timeout: 10000, title: "title" },
-  { id: 3, type: "success", timeout: 10000, title: "title" },
+  { id: 1, type: "success", timeout: 7000, title: "Custom Title 1" },
+  { id: 2, type: "error", timeout: 10000, title: "Custom Title 2" },
+  { id: 3, type: "success", title: "Custom Title 3" },
 ];
+
 function Main() {
-  //   const mainContainer = {
-  //     position: "absolute",
-  //   };
+  // Required State
+  const [toastData, setToastData] = useState(data);
 
-  const [toastData, setToastData] = React.useState(data);
-
+  // Handler Functions
   const handleClose = (e, id) => {
-    console.log("id: ", e, id);
-
     let filteredvalue = toastData.filter((el) => el.id !== id);
-
     setToastData(filteredvalue);
   };
 
+  // Styles
+  const mainContainerStyles = {
+    height: "100%",
+    width: "100%",
+    boxSizing: "border-box",
+  };
+
+  const toastContainerWrapper = {
+    height: "100%",
+    width: "100%",
+    boxSizing: "border-box",
+    position: "relative",
+  };
+
   return (
-    <div className="mainContainer">
-      Main
-      <Toast data={toastData} onClick={handleClose} />
+    <div className="mainContainer" style={mainContainerStyles}>
+      <div style={toastContainerWrapper}>
+        <ToastContainer
+          toastData={toastData}
+          onClick={handleClose}
+          position="topLeft"
+        />
+      </div>
     </div>
   );
 }

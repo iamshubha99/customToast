@@ -1,83 +1,82 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "material-icons/iconfont/material-icons.css";
-function Toast(props) {
-  console.log("Toast props: ", props);
-  const {
-    type = "success",
-    position = "topLeft",
-    timeout = 10000,
-    title = "title",
-    data,
 
+function Toast(props) {
+  // Destructuring props
+  const {
+    id,
+    type = "success",
+    timeout,
+    title = "title",
     onClick = () => {},
   } = props;
 
-  let toastContainer = {
-    position: "absolute",
-    height: "100vh",
-    width: "100vw",
-    background: "transparent",
-  };
+  //Required State
+  const [show, setShow] = useState(true);
+
+  // required Side effects
+  useEffect(() => {
+    if (timeout) {
+      let timer = setTimeout(() => {
+        setShow(false);
+      }, timeout);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, []);
+
+  // Styles
   let outerBox = {
-    background: type === "success" ? "#61ff8e" : "error" ? "#ff5a5a" : "",
+    background:
+      type === "success"
+        ? "rgb(104, 156, 114)"
+        : type === "error"
+        ? "rgb(196, 85, 76)"
+        : "gray",
     height: "40px",
     width: "300px",
-    borderRadius: "3px",
+    borderRadius: "5px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
     padding: "0px 5px",
+    boxShadow: " rgba(149, 157, 165, 0.2) 0px 8px 24px",
   };
 
   let commonIconStyle = {
     color: "white ",
+    cursor: "pointer",
   };
   let titleStyle = {
     color: "white ",
   };
 
   return (
-    <div
-      style={{
-        position: "absolute",
-        // right: "0px",
-      }}
-    >
-      {data.map((el) => {
-        console.log("el: ", el);
-        return (
-          <div style={{ padding: "5px 10px" }}>
-            {/* {el.type === "success" && ( */}
-            <div
-              style={{
-                ...outerBox,
-                background:
-                  el.type === "success"
-                    ? "#61ff8e"
-                    : el.type === "error"
-                    ? "#ff5a5a"
-                    : "black",
-              }}
-            >
-              <span
-                className="material-icons-round"
-                style={{ ...commonIconStyle }}
-              >
-                check_circle
-              </span>
-              <p style={titleStyle}>{title}</p>
-              <span
-                class="material-icons-round"
-                style={{ ...commonIconStyle, cursor: "pointer" }}
-                onClick={(e) => onClick(e, el.id)}
-              >
-                close
-              </span>
-            </div>
-            {/* )} */}
-          </div>
-        );
-      })}
+    <div style={{ padding: "5px 10px" }}>
+      {show && (
+        <div style={outerBox}>
+          {type === "success" && (
+            <span className="material-icons-round" style={commonIconStyle}>
+              check_circle
+            </span>
+          )}
+          {type === "error" && (
+            <span className="material-icons-round" style={commonIconStyle}>
+              error
+            </span>
+          )}
+          <p style={titleStyle}>{title}</p>
+          <span
+            className="material-icons-round"
+            style={commonIconStyle}
+            onClick={(e) => onClick(e, id)}
+          >
+            close
+          </span>
+        </div>
+      )}
     </div>
   );
 }
