@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 // import Material icons CSS
 import "material-icons/iconfont/material-icons.css";
 
-function Toast(props) {
+function ToastItem(props) {
   // Destructuring props
   const {
     id,
@@ -84,4 +84,4 @@ function Toast(props) {
   );
 }
 
-export default Toast;
+export default ToastItem;

@@ -2,7 +2,7 @@
 import React from "react";
 
 // Import Custom Component
-import Toast from "./Toast";
+import ToastItem from "./ToastItem";
 
 function ToastContainer(props) {
   // destructuring props
@@ -25,7 +25,7 @@ function ToastContainer(props) {
       {toastData.map((el, index) => {
         return (
           <div key={index}>
-            <Toast {...el} onClick={onClick} />
+            <ToastItem {...el} onClick={onClick} />
           </div>
         );
       })}
