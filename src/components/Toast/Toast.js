@@ -1,4 +1,7 @@
+// Import Library
 import React, { useEffect, useState } from "react";
+
+// import Material icons CSS
 import "material-icons/iconfont/material-icons.css";
 
 function Toast(props) {

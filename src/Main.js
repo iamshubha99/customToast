@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 
 // Import Custom Component
-import ToastContainer from "./components/ToastContainer";
+import Toast from "./components/Toast";
 
 // Static Data(Toast)
 let data = [
@@ -38,11 +38,7 @@ function Main() {
   return (
     <div className="mainContainer" style={mainContainerStyles}>
       <div style={toastContainerWrapper}>
-        <ToastContainer
-          toastData={toastData}
-          onClick={handleClose}
-          position="topLeft"
-        />
+        <Toast toastData={toastData} onClick={handleClose} position="topLeft" />
       </div>
     </div>
   );
