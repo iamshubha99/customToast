@@ -57,30 +57,32 @@ function ToastItem(props) {
   };
 
   return (
-    <div style={{ padding: "5px 10px" }}>
+    <>
       {show && (
-        <div style={outerBox}>
-          {type === "success" && (
-            <span className="material-icons-round" style={commonIconStyle}>
-              check_circle
+        <div style={{ padding: "5px 10px" }}>
+          <div style={outerBox}>
+            {type === "success" && (
+              <span className="material-icons-round" style={commonIconStyle}>
+                check_circle
+              </span>
+            )}
+            {type === "error" && (
+              <span className="material-icons-round" style={commonIconStyle}>
+                error
+              </span>
+            )}
+            <p style={titleStyle}>{title}</p>
+            <span
+              className="material-icons-round"
+              style={commonIconStyle}
+              onClick={(e) => onClick(e, id)}
+            >
+              close
             </span>
-          )}
-          {type === "error" && (
-            <span className="material-icons-round" style={commonIconStyle}>
-              error
-            </span>
-          )}
-          <p style={titleStyle}>{title}</p>
-          <span
-            className="material-icons-round"
-            style={commonIconStyle}
-            onClick={(e) => onClick(e, id)}
-          >
-            close
-          </span>
+          </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
 
