@@ -28,7 +28,7 @@ function ToastItem(props) {
         clearTimeout(timer);
       };
     }
-  }, []);
+  }, [timeout]);
 
   // Styles
   let outerBox = {
